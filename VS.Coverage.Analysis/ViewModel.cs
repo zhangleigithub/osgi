@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.Coverage.Analysis;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,7 +24,7 @@ namespace VS.Coverage.Analysis
         /// <summary>
         /// 结果
         /// </summary>
-        public ObservableCollection<CoverageAnalysisResult> CoverageAnalysisResults = new ObservableCollection<CoverageAnalysisResult>();
+        public ObservableCollection<CoverageAnalysisResult> CoverageAnalysisResults { get; private set; }
 
         /// <summary>
         /// 打开命令
@@ -42,42 +43,49 @@ namespace VS.Coverage.Analysis
 
             exportToCSVCommand = new DelegateCommand();
             exportToCSVCommand.OnExecuted = this.ExportToCSV;
+
+            this.CoverageAnalysisResults = new ObservableCollection<CoverageAnalysisResult>();
         }
 
         private void Open()
         {
-            Microsoft.Win32.OpenFileDialog ofdl = new Microsoft.Win32.OpenFileDialog();
-            ofdl.Filter = "123";
-            if (ofdl.ShowDialog() == true)
+            OpenFileDialog ofdl = new OpenFileDialog();
+            ofdl.Filter = "coveragexml|*.coveragexml";
+            ofdl.Multiselect = false;
+            if ((bool)ofdl.ShowDialog())
             {
+                CoverageDS dataSet = new CoverageDS();
+                dataSet.ImportXml(ofdl.FileName);
 
-            }
+                CoverageAnalysisResults.Clear();
 
-            CoverageDS dataSet = new CoverageDS();
-            dataSet.ImportXml(@"G:\合并的结果.coveragexml");
+                foreach (var item in dataSet.Method)
+                {
+                    CoverageAnalysisResult coverageAnalysisResult = new CoverageAnalysisResult();
+                    coverageAnalysisResult.ModuleName = item.ClassRow.NamespaceTableRow.ModuleName;
+                    coverageAnalysisResult.NamespaceName = item.ClassRow.NamespaceTableRow.NamespaceName;
+                    coverageAnalysisResult.ClassName = item.ClassRow.ClassName;
+                    coverageAnalysisResult.LinesCovered = item.LinesCovered;
+                    coverageAnalysisResult.LinesNotCovered = item.LinesNotCovered;
 
-            CoverageAnalysisResults.Clear();
-
-            foreach (var item in dataSet.Method)
-            {
-                CoverageAnalysisResult coverageAnalysisResult = new CoverageAnalysisResult();
-                coverageAnalysisResult.ModuleName = item.ClassRow.NamespaceTableRow.ModuleName;
-                coverageAnalysisResult.NamespaceName = item.ClassRow.NamespaceTableRow.NamespaceName;
-                coverageAnalysisResult.ClassName = item.ClassRow.ClassName;
-                coverageAnalysisResult.LinesCovered = item.LinesCovered;
-                coverageAnalysisResult.LinesNotCovered = item.LinesNotCovered;
-
-                CoverageAnalysisResults.Add(coverageAnalysisResult);
+                    CoverageAnalysisResults.Add(coverageAnalysisResult);
+                }
             }
         }
 
         private void ExportToCSV()
         {
-            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(@"G:\20170904.csv", false))
+            SaveFileDialog sfdl = new SaveFileDialog();
+            sfdl.Filter = "csv|*.csv";
+            sfdl.AddExtension = true;
+            if ((bool)sfdl.ShowDialog())
             {
-                foreach (var item in CoverageAnalysisResults)
+                using (System.IO.StreamWriter sw = new System.IO.StreamWriter(sfdl.FileName, false))
                 {
-                    sw.WriteLine("{0},{1},{2},{3},{4}", item.ModuleName, item.NamespaceName, item.ClassName, item.LinesCovered, item.LinesNotCovered);
+                    foreach (var item in CoverageAnalysisResults)
+                    {
+                        sw.WriteLine("{0},{1},{2},{3},{4}", item.ModuleName, item.NamespaceName, item.ClassName, item.LinesCovered, item.LinesNotCovered);
+                    }
                 }
             }
         }

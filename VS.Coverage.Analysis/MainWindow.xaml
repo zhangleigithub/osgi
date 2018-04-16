@@ -1,30 +1,30 @@
-﻿<Window x:Class="VS.Coverage.Analysis.MainWindow"
+﻿<ContentControl x:Class="VS.Coverage.Analysis.CustomControl"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VS.Coverage.Analysis"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        d:DesignHeight="350" d:DesignWidth="525">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <Button Content="打开" Command="{Binding OpenCommand}"></Button>
-            <Button Content="导出CSV" Command="{Binding ExportToCSVCommand}"></Button>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Content="打开" Command="{Binding OpenCommand}" Width="100" Margin="0 8 8 8"></Button>
+            <Button Content="导出CSV" Command="{Binding ExportToCSVCommand}" Width="100" Margin="0 8 8 8"></Button>
         </StackPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding CoverageAnalysisResults}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="模块名称" DisplayMemberBinding="{Binding ModuleName}" Width="120"></GridViewColumn>
-                    <GridViewColumn Header="命名空间" DisplayMemberBinding="{Binding NamespaceName}" Width="48"></GridViewColumn>
-                    <GridViewColumn Header="类名" DisplayMemberBinding="{Binding ClassName}" Width="120"></GridViewColumn>
-                    <GridViewColumn Header="已覆盖块" DisplayMemberBinding="{Binding LinesCovered}" Width="120"></GridViewColumn>
-                    <GridViewColumn Header="未覆盖块" DisplayMemberBinding="{Binding LinesNotCovered}" Width="120"></GridViewColumn>
+                    <GridViewColumn Header="模块名称" DisplayMemberBinding="{Binding ModuleName}" Width="Auto"></GridViewColumn>
+                    <GridViewColumn Header="命名空间" DisplayMemberBinding="{Binding NamespaceName}" Width="Auto"></GridViewColumn>
+                    <GridViewColumn Header="类名" DisplayMemberBinding="{Binding ClassName}" Width="Auto"></GridViewColumn>
+                    <GridViewColumn Header="已覆盖块" DisplayMemberBinding="{Binding LinesCovered}" Width="Auto"></GridViewColumn>
+                    <GridViewColumn Header="未覆盖块" DisplayMemberBinding="{Binding LinesNotCovered}" Width="Auto"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
     </Grid>
-</Window>
+</ContentControl>

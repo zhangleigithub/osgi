@@ -19,7 +19,7 @@ namespace VS.Coverage.Analysis
             menuItem.Header = "Coverage";
             menuItem.Click += (sender, e) =>
             {
-                window.AddChildrenToLayoutRootPanel("Coverage Reader", new MainWindow());
+                window.AddChildrenToLayoutRootPanel("Coverage Reader", new CustomControl());
             };
 
             window.AddMenuItem(menuItem);

@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace VS.Coverage.Analysis
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// CustomControl.xaml 的交互逻辑
     /// </summary>
     public partial class CustomControl : ContentControl
     {

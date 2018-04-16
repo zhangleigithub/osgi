@@ -61,13 +61,13 @@
     <Compile Include="Activator.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="ViewModel.cs" />
-    <Page Include="MainWindow.xaml">
+    <Page Include="CustomControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="CoverageAnalysisResult.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="CustomControl.xaml.cs">
+      <DependentUpon>CustomControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

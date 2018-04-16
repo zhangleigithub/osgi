@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" SymbolicName="VS.Coverage.Analysis" StartLevel="3">
+  <Activator Type="VS.Coverage.Analysis.Activator" />
+  <Runtime>
+    <Assembly Path="VS.Coverage.Analysis.dll" />
+    <Assembly Path="UIShell.OSGi.dll" />
+    <Assembly Path="Microsoft.VisualStudio.Coverage.Analysis.dll" />
+  </Runtime>
+</Bundle>

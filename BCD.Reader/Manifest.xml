@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" SymbolicName="BCD.Reader" StartLevel="3">
+  <Activator Type="BCD.Reader.Activator" />
+  <Runtime>
+    <Assembly Path="BCD.Reader.dll" />
+    <Assembly Path="UIShell.OSGi.dll" />
+  </Runtime>
+</Bundle>

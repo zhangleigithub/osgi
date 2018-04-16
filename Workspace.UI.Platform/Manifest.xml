@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" SymbolicName="Workspace.UI.Platform" StartLevel="2">
+  <Activator Type="Workspace.UI.Platform.Activator" />
+  <Runtime>
+    <Assembly Path="Workspace.UI.Platform.dll" />
+    <Assembly Path="UIShell.OSGi.dll" />
+    <Assembly Path="Xceed.Wpf.AvalonDock.dll" />
+    <Assembly Path="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+  </Runtime>
+</Bundle>

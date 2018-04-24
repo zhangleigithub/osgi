@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Bundle xmlns="urn:uiosp-bundle-manifest-2.0" SymbolicName="App.Control.Param" StartLevel="3">
+  <Activator Type="App.Control.Param.Activator" />
+  <Runtime>
+    <Assembly Path="App.Control.Param.dll" />
+    <Assembly Path="UIShell.OSGi.dll" />
+    <Assembly Path="MDIContainer.Control.dll" />
+  </Runtime>
+</Bundle>
